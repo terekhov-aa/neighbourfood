@@ -11,7 +11,6 @@
 
 <script>
     import firebase from '../configFirebase.js'
-    import postDog from './mixins/postDog.js'
     export default {
         data () {
             return {

@@ -125,7 +125,7 @@ export default {
     ],
     whatsNext: [
       {
-        text: 'Explore components',
+        text: 'Explore views',
         href: 'https://vuetifyjs.com/components/api-explorer',
       },
       {

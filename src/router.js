@@ -10,35 +10,35 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ './components/Home.vue')
+      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
     },
     {
       path: '/details/:id',
       name: 'details',
       props: true,
-      component: () => import(/* webpackChunkName: "details" */ './components/Details.vue')
+      component: () => import(/* webpackChunkName: "details" */ './views/Details.vue')
     },
     {
       path: '/post/:id?',
       name: 'post',
       props: true,
       beforeEnter: AuthGuard,
-      component: () => import(/* webpackChunkName: "post" */ './components/Post.vue')
+      component: () => import(/* webpackChunkName: "post" */ './views/Post.vue')
     },
     {
       path: '/camera',
       name: 'camera',
-      component: () => import(/* webpackChunkName: "camera" */ './components/Camera.vue')
+      component: () => import(/* webpackChunkName: "camera" */ './views/Camera.vue')
     },
     {
       path: '/registration',
       name: 'registration',
-      component: () => import(/* webpackChunkName: "registration" */ './components/Registration.vue')
+      component: () => import(/* webpackChunkName: "registration" */ './views/Registration.vue')
     },
     {
       path: '/authorization',
       name: 'authorization',
-      component: () => import(/* webpackChunkName: "authorization" */ './components/Authorization.vue')
+      component: () => import(/* webpackChunkName: "authorization" */ './views/Authorization.vue')
     }
   ]
 })
