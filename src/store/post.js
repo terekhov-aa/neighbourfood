@@ -27,13 +27,7 @@ export default {
                 price: payload.price,
                 dateCreated: payload.dateCreated
             }
-        },/*,
-        unset_user(state) {
-            state.user = {
-                isAuthenticated: false,
-                uid: null
-            }
-        }*/
+        },
     },
     actions: {
         createPost({commit}, payload) {

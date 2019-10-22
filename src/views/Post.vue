@@ -2,7 +2,12 @@
     <v-container grid-list-xs>
         <v-layout>
             <v-flex>
-                <img :src="this.image"/>
+                <v-image-input
+                        v-model="this.image"
+                        :image-quality="0.85"
+                        clearable
+                        image-format="jpeg"
+                ></v-image-input>
                 <v-container fluid style="min-height: 0" grid-list-lg>
                     <v-layout row wrap>
                         <v-flex xs12>
@@ -25,7 +30,12 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import VImageInput from 'vuetify-image-input';
+    import Vue from 'vue';
+    import vuetify from '../plugins/vuetify';
+    Vue.use(vuetify);
+
+    Vue.component(VImageInput.name, VImageInput);
 
     export default {
         props: {
@@ -36,7 +46,7 @@
         },
         data() {
             return {
-                image: null,
+                image: '',
                 title: '',
                 comment: '',
                 price: ''
@@ -57,16 +67,6 @@
             } else {
                 if (this.pictureUrl !== '') {
                     this.image = this.pictureUrl;
-                    this.loading = false;
-                } else {
-                    axios.get('https://dog.ceo/api/breed/appenzeller/images/random').then(response => {
-                        if (response.data.status) {
-                            this.image = response.data.message;
-                            this.loading = false;
-                        } else {
-                            console.log("Error getting image")
-                        }
-                    })
                 }
             }
         },
@@ -84,6 +84,12 @@
                 } else {
                     this.$store.dispatch('createPost', data)
                 }
+            },
+            editImage() {
+                alert('it edit!')
+            },
+            deleteImage() {
+                alert('it delete!')
             }
         }
     }
@@ -95,5 +101,17 @@
         height: auto;
         width: auto \9;
         /* ie8 */
+    }
+
+    .container {
+        position: relative;
+        text-align: center;
+        color: white;
+    }
+    .top-right {
+        /*position: absolute;*/
+        top: 8px;
+        right: 16px;
+        /*display: inline;*/
     }
 </style>

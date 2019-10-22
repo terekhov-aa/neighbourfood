@@ -26,11 +26,6 @@ export default new Router({
       component: () => import(/* webpackChunkName: "post" */ './views/Post.vue')
     },
     {
-      path: '/camera',
-      name: 'camera',
-      component: () => import(/* webpackChunkName: "camera" */ './views/Camera.vue')
-    },
-    {
       path: '/registration',
       name: 'registration',
       component: () => import(/* webpackChunkName: "registration" */ './views/Registration.vue')

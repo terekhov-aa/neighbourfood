@@ -6,7 +6,10 @@ import vuetify from './plugins/vuetify';
 import store from './store'
 import firebase from "firebase";
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+// import VImageInput from 'vuetify-image-input';
 
+
+// Vue.component(VImageInput.name, VImageInput);
 
 Vue.config.productionTip = false
 

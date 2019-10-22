@@ -8,12 +8,9 @@
                 <v-icon>arrow_back</v-icon>
             </v-btn>
             <v-toolbar-title>
-                <span>CropChien</span>
+                <span  @click="$router.push({name:'home'})" :style="{ cursor: 'pointer'}">NeighborFood</span>
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon v-if="$route.name=='post'" @click="$router.push({name:'camera'})">
-                <v-icon>camera_alt</v-icon>
-            </v-btn>
             <v-btn icon v-if="!isUserAuthenticated">
                 <v-icon @click="$router.push({name:'registration'})">account_box</v-icon>
             </v-btn>
