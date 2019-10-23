@@ -6,12 +6,11 @@ import vuetify from './plugins/vuetify';
 import store from './store'
 import firebase from "firebase";
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
-// import VImageInput from 'vuetify-image-input';
+import Croppa from "vue-croppa/src/main";
 
 
-// Vue.component(VImageInput.name, VImageInput);
 
-Vue.config.productionTip = false
+
 
 new Vue({
   created(){
@@ -25,3 +24,6 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
+
+
+Vue.use(Croppa);

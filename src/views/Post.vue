@@ -2,12 +2,14 @@
     <v-container grid-list-xs>
         <v-layout>
             <v-flex>
-                <v-image-input
-                        v-model="this.image"
-                        :image-quality="0.85"
-                        clearable
-                        image-format="jpeg"
-                ></v-image-input>
+                <croppa :width="350"
+                        :height="350"
+                        placeholder="Choose an image"
+                        :placeholder-font-size="0"
+                        :disabled="false"
+                        :prevent-white-space="false"
+                        :show-remove-button="true">
+                </croppa >
                 <v-container fluid style="min-height: 0" grid-list-lg>
                     <v-layout row wrap>
                         <v-flex xs12>
@@ -30,13 +32,6 @@
 </template>
 
 <script>
-    import VImageInput from 'vuetify-image-input';
-    import Vue from 'vue';
-    import vuetify from '../plugins/vuetify';
-    Vue.use(vuetify);
-
-    Vue.component(VImageInput.name, VImageInput);
-
     export default {
         props: {
             pictureUrl: {
