@@ -3,16 +3,17 @@
         <v-layout v-if="loading">
             <v-flex>
                 <div id="spinner_container">
-                    <v-progress-circular v-if="loading" v-bind:size="40" indeterminate color="pink" class="spinner">
-                    </v-progress-circular>
+                    <v-progress-circular v-if="loading" 
+                                         v-bind:size="40" 
+                                         indeterminate
+                                         color="pink" 
+                                         class="spinner" />
                 </div>
             </v-flex>
         </v-layout>
         <v-layout v-if="!loading" column>
             <v-flex>
-                <v-img
-                        :src="image"
-                ></v-img>
+                <v-img :src="image" />
             </v-flex>
             <v-flex>
                 <h1>{{ title }}</h1>
@@ -25,7 +26,6 @@
                 <span>Редактировать</span>
                 <v-icon>create</v-icon>
             </v-btn>
-
             <v-btn @click.prevent="removePost">
                 <span>Удалить</span>
                 <v-icon>delete</v-icon>
