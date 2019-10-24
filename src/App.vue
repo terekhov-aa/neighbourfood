@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-app-bar app>
+        <v-app-bar app style="z-index: 100500">
             <v-btn
                     icon v-if="$route.name !== 'home'"
                     @click="$router.go(-1) "

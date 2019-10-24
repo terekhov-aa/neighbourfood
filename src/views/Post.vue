@@ -2,14 +2,19 @@
     <v-container grid-list-xs>
         <v-layout>
             <v-flex>
-                <croppa :width="350"
-                        :height="350"
-                        placeholder="Choose an image"
-                        :placeholder-font-size="0"
-                        :disabled="false"
-                        :prevent-white-space="false"
-                        :show-remove-button="true">
-                </croppa >
+                <v-container fluid style="min-height: 0" grid-list-lg>
+                    <croppa v-model="image"
+                            :width="350"
+                            :height="350"
+                            placeholder="Выберите изображение"
+                            :placeholder-font-size="0"
+                            :disabled="false"
+                            :prevent-white-space="false"
+                            :show-remove-button="true">
+                        <img slot="initial" :src="initialImage" />
+                    </croppa>
+                </v-container>
+
                 <v-container fluid style="min-height: 0" grid-list-lg>
                     <v-layout row wrap>
                         <v-flex xs12>
@@ -20,6 +25,7 @@
                                           hint="Опишите все что считаете важным: контакты, состав, количество"
                                           id="comment"/>
                             <v-btn block color="primary"
+                                   :disabled="processing"
                                    @click="post()">
                                 Продать еду!
                             </v-btn>
@@ -32,6 +38,7 @@
 </template>
 
 <script>
+    import firebase from '../configFirebase.js'
     export default {
         props: {
             pictureUrl: {
@@ -39,30 +46,31 @@
                 type: String
             }
         },
+        computed:{
+            processing(){
+                return this.$store.getters.getProcessing
+            }
+        },
         data() {
             return {
-                image: '',
+                image: null,
                 title: '',
                 comment: '',
-                price: ''
+                price: '',
+                initialImage: ''
             }
         },
         mounted() {
             if (this.$route.params.id) {
                 const id = this.$route.params.id
                 let me = this;
-
                 this.$store.dispatch('setPost', {id: id}).then(function () {
-                        me.image = me.$store.getters.getImage
+                        me.initialImage = me.$store.getters.getImage
                         me.title = me.$store.getters.getPostTitle
                         me.comment = me.$store.getters.getComment
                         me.price = me.$store.getters.getPrice
                     }
                 )
-            } else {
-                if (this.pictureUrl !== '') {
-                    this.image = this.pictureUrl;
-                }
             }
         },
         methods: {
@@ -79,12 +87,23 @@
                 } else {
                     this.$store.dispatch('createPost', data)
                 }
-            },
-            editImage() {
-                alert('it edit!')
-            },
-            deleteImage() {
-                alert('it delete!')
+                this.$router.push({name:'home'})
+                // this.image.generateBlob(
+                //     blob => {
+                //         firebase.storage.ref().child(`images/picture-${new Date().getTime()}`).put(blob)
+                //             .then(res => {
+                //                 res.ref.getDownloadURL().then((pictureUrl) => {
+                //
+                //                 });
+                //             })
+                //             .catch(err => {
+                //                 console.log(err)
+                //                 this.$router.go(-1)
+                //             });
+                //     },
+                //     'image/jpeg',
+                //     0.8
+                // );
             }
         }
     }
@@ -96,17 +115,5 @@
         height: auto;
         width: auto \9;
         /* ie8 */
-    }
-
-    .container {
-        position: relative;
-        text-align: center;
-        color: white;
-    }
-    .top-right {
-        /*position: absolute;*/
-        top: 8px;
-        right: 16px;
-        /*display: inline;*/
     }
 </style>

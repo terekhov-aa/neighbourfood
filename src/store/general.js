@@ -17,5 +17,11 @@ export default {
     getters: {
         getProcessing: (state) => state.processing,
         getError: (state) => state.error
+    },
+    actions: {
+        setProcessing({commit}) {
+            commit('set_processing', true)
+            commit('clean_error')
+        }
     }
 }

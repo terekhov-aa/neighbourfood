@@ -1,4 +1,6 @@
 import firebase from 'firebase'
+// import firebaseStorage from 'firebase/storage';
+import vecherniyCostyl from   '../configFirebase.js'
 import router from "../router";
 import store from "../store";
 
@@ -33,6 +35,7 @@ export default {
         createPost({commit}, payload) {
             commit('set_processing', true)
             commit('clean_error')
+            payload.image = getImageUrlFromCroppa(payload.image)
             firebase.firestore().collection('posts').add(
                 {
                     actual: true,
@@ -88,6 +91,7 @@ export default {
         updatePost({commit}, payload){
             commit('set_processing', true)
             commit('clean_error')
+            payload.image = getImageUrlFromCroppa(payload.image)
             let post = firebase.firestore().collection('posts').doc(payload.id);
             delete payload.id
             return post.update(payload)
@@ -112,4 +116,26 @@ export default {
         getDateCreated: (state) => state.post.dateCreated,
         getAllOfPost: (state) => state.post
     }
+}
+
+function getImageUrlFromCroppa(image) {
+    let url = null
+    if (image && image.hasImage()) { //@todo Починить асинхронность
+        image.generateBlob(
+            blob => {
+                vecherniyCostyl.storage.ref().child(`images/picture-${new Date().getTime()}`).put(blob)
+                    .then(res => {
+                        res.ref.getDownloadURL().then((pictureUrl) => {
+                            url = pictureUrl
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
+            },
+            'image/jpeg',
+            0.8
+        );
+    }
+    return url
 }
