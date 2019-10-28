@@ -36,7 +36,7 @@
 
 <script>
     import firebase from '../configFirebase.js'
-
+    import emptyPhoto from '../assets/no_photo.png'
     export default {
         props: {
             postProp: {
@@ -45,7 +45,7 @@
         },
         computed: {
             image() {
-                return this.$store.getters.getImage
+                return this.$store.getters.getImage || emptyPhoto
             },
             title() {
                 return this.$store.getters.getPostTitle
@@ -65,6 +65,7 @@
                 this.$store.dispatch('removePost', {
                     id: this.$route.params.id
                 })
+                this.$router.push({name:'home'})
             },
             updatePost() {
                 this.$router.push({name: `post`, params: {id: this.$route.params.id}})

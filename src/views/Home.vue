@@ -110,6 +110,7 @@
 
 <script>
     import firebase from '../configFirebase.js'
+    import emptyPhoto from '../assets/no_photo.png'
     export default {
         data(){
             return{
@@ -133,7 +134,7 @@
 
                     this.posts.push({
                         id:post.id,
-                        image:post.data().image ,
+                        image:post.data().image || emptyPhoto,
                         title:post.data().title,
                         price:post.data().price,
                         dateCreated:formattedTime
