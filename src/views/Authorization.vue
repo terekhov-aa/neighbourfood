@@ -47,6 +47,7 @@
                                     ></v-text-field>
                                 </v-form>
                             </v-card-text>
+                            <social-sign></social-sign>
                             <v-card-actions>
                                 <div class="flex-grow-1"></div>
                                 <v-btn
@@ -63,8 +64,10 @@
 </template>
 
 <script>
+    import SocialSign from "../components/SocialSign";
     export default {
         name: "Authorization",
+        components: {SocialSign},
         data(){
             return {
                 email: null,
