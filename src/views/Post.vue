@@ -10,8 +10,10 @@
                             :placeholder-font-size="0"
                             :disabled="false"
                             :prevent-white-space="false"
-                            :show-remove-button="true">
-                        <img slot="initial" :src="initialImage" />
+                            :show-remove-button="true"
+                            @image-remove="onImageRemove"
+                            >
+                        <img slot="initial" :src="initialImage"/>
                     </croppa>
                 </v-container>
 
@@ -88,23 +90,13 @@
                     this.$store.dispatch('createPost', data)
                 }
                 this.$router.push({name:'home'})
-                // this.image.generateBlob(
-                //     blob => {
-                //         firebase.storage.ref().child(`images/picture-${new Date().getTime()}`).put(blob)
-                //             .then(res => {
-                //                 res.ref.getDownloadURL().then((pictureUrl) => {
-                //
-                //                 });
-                //             })
-                //             .catch(err => {
-                //                 console.log(err)
-                //                 this.$router.go(-1)
-                //             });
-                //     },
-                //     'image/jpeg',
-                //     0.8
-                // );
+            },
+            onImageRemove() {
+                this.$store.dispatch('removeImage')
+                this.initialImage = null
+                this.image.refresh()
             }
+
         }
     }
 </script>

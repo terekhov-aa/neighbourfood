@@ -65,6 +65,7 @@
                 this.$store.dispatch('removePost', {
                     id: this.$route.params.id
                 })
+                this.$router.push({name:'home'})
             },
             updatePost() {
                 this.$router.push({name: `post`, params: {id: this.$route.params.id}})
